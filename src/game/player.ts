@@ -17,6 +17,7 @@ export class Player {
     width: number,
     height: number,
     imagePath: string
+    
 
   ) {
     this.x = x;
@@ -31,7 +32,7 @@ export class Player {
     this.image = new Image();   // Charger une l'image
     this.image.src = imagePath; //chemein de l'image
   }
-  console.log('hello');
+
   
 
   draw(ctx: CanvasRenderingContext2D) {

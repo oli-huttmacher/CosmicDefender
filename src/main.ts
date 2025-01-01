@@ -3,7 +3,8 @@ import { Player } from "@game/player";
 import { PhysicsEngine } from "@game/physicsEngine";
 import { GameCanvas } from "@game/gameCanvas";
 import vaisseauTab1 from "@assets/img/vaisseau1.png";
-
+import { Background } from "@game/background";
+import  imgBackground  from "@assets/img/univers.png";
 // import { timeStamp } from "console";
 
 /*================== Variables stystem=================*/
@@ -14,10 +15,12 @@ if (!ctx) {
 }
 let lastTime = 0;
 const directions = { x: 0, y: 0 }; // Indique si on avance ou pas
-/*================== creation du player =================*/
+
+/*================== creation du jeu =================*/
 const gameCanvas = new GameCanvas(800,600);
 const player = new Player(100, 50, 50, 50, vaisseauTab1);
-
+const background = new Background(imgBackground, 50);
+console.log(background);
 const physicsEngine = new PhysicsEngine(1, 0.1);
 
 // Ajouter le joueur au moteur physique
@@ -47,6 +50,9 @@ function gameLoop(timestamp: number) {
   lastTime = timestamp;
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+   // Mettre à jour et dessiner le background
+   background.update(deltaTime, canvas.width);
+   background.draw(ctx, canvas.height);
 
   // Appliquer les directions pour ajuster la vélocité
   player.applyForce(directions.x, directions.y);
